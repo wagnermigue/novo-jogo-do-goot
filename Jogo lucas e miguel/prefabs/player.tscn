@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx3kgp1jrfjg1"]
+
+[ext_resource type="Script" path="res://prefabs/scripts/player.gd" id="1_d3ceg"]
+[ext_resource type="Texture2D" uid="uid://2tnuj5j8ajhi" path="res://assets/1.png" id="2_k32na"]
+[ext_resource type="Texture2D" uid="uid://ttwo8h64j1uh" path="res://assets/4.png" id="3_pijpy"]
+[ext_resource type="Texture2D" uid="uid://dqafmjqjjpgb2" path="res://assets/3.png" id="4_ki323"]
+[ext_resource type="Texture2D" uid="uid://x4sma7dubcqn" path="res://assets/2.png" id="5_t66qs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_daqos"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k32na")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pijpy")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ki323")
+}],
+"loop": true,
+"name": &"move_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_t66qs")
+}],
+"loop": true,
+"name": &"move_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_msig1"]
+radius = 29.1548
+
+[node name="Player" type="Area2D"]
+position = Vector2(240, 360)
+script = ExtResource("1_d3ceg")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.52)
+sprite_frames = SubResource("SpriteFrames_daqos")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_msig1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
